@@ -56,6 +56,22 @@ vst/build.sh
 `docs/RELEASING.md` to package the release zip + installer. The compiled `.so` is device-specific and
 is **not** checked in.
 
+### Devices with a read-only `/sdcard` or an exfat (noexec) SD card
+
+Some modded units (certain Hakai / MockbaMod MPC One setups) mount `/sdcard` read-only and only read
+plugin skins from the exfat SD card (`/media/MPCONE/Synths`, mounted `noexec`) and the firmware. On
+those the portable installer can't place an executable `.so` where MPC would load it, so install by
+hand with a **split layout** instead:
+
+1. Copy `portable/nachtaktiv303 - VST - Mutable Vibe MPC/Plugin Skins/` (and `version.xml`) to the SD
+   `Synths` folder, e.g. `/media/MPCONE/Synths/nachtaktiv303 - VST - Mutable Vibe MPC/`.
+2. Copy `mutable_vibe_mpc.so` to an **executable** path such as `/data/vst/`.
+3. Add this line inside `<VALUE name="pluginList-arm"><KNOWNPLUGINS>` in `MPC.settings` (MPC stopped),
+   with `file=` pointing at the executable `.so`:
+   `<PLUGIN name="Mutable Vibe MPC" descriptiveName="Mutable Vibe MPC" format="VST" category="Synth" manufacturer="nachtaktiv303" version="1.0" file="/data/vst/mutable_vibe_mpc.so" uid="4d745662" isInstrument="1" numInputs="0" numOutputs="2" isShell="0"/>`
+4. Restart MPC. (A different SD card doesn't change this — exfat is always `noexec`; it's the device's
+   storage layout, not the card.)
+
 ## Credits & licence
 
 - **Rings** and **Plaits** DSP © 2012–2016 Émilie Gillet / Mutable Instruments — MIT.
