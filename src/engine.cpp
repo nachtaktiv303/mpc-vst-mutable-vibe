@@ -446,7 +446,7 @@ static void *create(const char *data_dir) {
     /* defaults must match params.json so the first getParameter() matches each param's declared default */
     apply(s, "structure", 0.5);  apply(s, "brightness", 0.5);
     apply(s, "damping",   0.5);  apply(s, "position",   0.3);
-    apply(s, "model", 0);
+    apply(s, "model", 1);   /* default model = R: SYMPATHETIC (plays on open) */
     apply(s, "attack", 2.0);  apply(s, "decay", 400.0);
     apply(s, "sustain", 0.8); apply(s, "release", 600.0);
     apply(s, "filterCutoff", 20000.0);  apply(s, "filterResonance", 0.0);
@@ -484,7 +484,7 @@ static void *create(const char *data_dir) {
     /* Global / performance params */
     s->bpm = 120.f;
     apply(s, "lpgDecay", 1.0);   apply(s, "polyphony", 3.0);  apply(s, "octave", 0.0);   /* poly index 3 = 4 voices */
-    apply(s, "delaySync", 0.0);  apply(s, "delayDiv", 2.0);
+    apply(s, "delaySync", 1.0);  apply(s, "delayDiv", 2.0);   /* default synced */
     s->cutoffSmooth_ = s->filterCutoff;
     s->delayTimeCur  = s->delayTime;
     return s;
@@ -762,6 +762,16 @@ static void compute_mod(state_t *s, int frames, float *modVals) {
     }
 }
 
+/* Clean below the knee (-2.5 dBFS), then a tanh knee up to full scale. A global tanh would colour even a
+ * single voice; the knee keeps quiet material bit-exact and only rounds the peaks that polyphony stacks up.
+ * Replaces the old hard clip so summed voices / FX overshoot saturate softly instead of tearing. */
+static inline float soft_clip(float x) {
+    const float knee = 0.75f;
+    float a = fabsf(x);
+    if (a <= knee) return x;
+    return copysignf(knee + (1.0f - knee) * tanhf((a - knee) / (1.0f - knee)), x);
+}
+
 static void render(void *inst, int16_t *out_lr, int frames) {
     state_t *s = (state_t *)inst;
     int plaits = model_is_plaits(s->model);
@@ -873,9 +883,8 @@ static void render(void *inst, int16_t *out_lr, int frames) {
         sat_process(s->sat, mix, c);
 
         for (int i = 0; i < c; i++) {
-            float l = mix[i * 2], r = mix[i * 2 + 1];
-            if (l > 1.0f) l = 1.0f; else if (l < -1.0f) l = -1.0f;
-            if (r > 1.0f) r = 1.0f; else if (r < -1.0f) r = -1.0f;
+            float l = soft_clip(mix[i * 2]);
+            float r = soft_clip(mix[i * 2 + 1]);
             out_lr[(done + i) * 2]     = (int16_t)lrintf(l * 32767.0f);
             out_lr[(done + i) * 2 + 1] = (int16_t)lrintf(r * 32767.0f);
         }

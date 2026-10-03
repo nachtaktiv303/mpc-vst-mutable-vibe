@@ -62,7 +62,7 @@
         "P: STRING",
         "P: MODAL SYNTH"
       ],
-      "default": "Modal"
+      "default": "R: SYMPATHETIC"
     },
     {
       "key": "attack",
@@ -126,7 +126,7 @@
         "12 DB",
         "24 DB"
       ],
-      "default": "24 dB"
+      "default": "24 DB"
     },
     {
       "key": "reverbDecay",
@@ -146,7 +146,7 @@
     },
     {
       "key": "reverbWet",
-      "name": "REVERB WET",
+      "name": "AMOUNT",
       "min": 0.0,
       "max": 1.0,
       "default": 0.0,
@@ -177,7 +177,7 @@
     },
     {
       "key": "delayWet",
-      "name": "DELAY WET",
+      "name": "AMOUNT",
       "min": 0.0,
       "max": 1.0,
       "default": 0.0,
@@ -201,7 +201,7 @@
     },
     {
       "key": "chorusWet",
-      "name": "CHORUS WET",
+      "name": "AMOUNT",
       "min": 0.0,
       "max": 1.0,
       "default": 0.0,
@@ -209,7 +209,7 @@
     },
     {
       "key": "satDrive",
-      "name": "DRIVE",
+      "name": "AMOUNT",
       "min": 0.0,
       "max": 1.0,
       "default": 0.0,
@@ -305,7 +305,7 @@
         "DLY TIME",
         "DLY FBK"
       ],
-      "default": "None"
+      "default": "NONE"
     },
     {
       "key": "env3Amount",
@@ -364,7 +364,7 @@
         "DLY TIME",
         "DLY FBK"
       ],
-      "default": "None"
+      "default": "NONE"
     },
     {
       "key": "env4Amount",
@@ -423,7 +423,7 @@
         "DLY TIME",
         "DLY FBK"
       ],
-      "default": "None"
+      "default": "NONE"
     },
     {
       "key": "env5Amount",
@@ -482,7 +482,7 @@
         "DLY TIME",
         "DLY FBK"
       ],
-      "default": "None"
+      "default": "NONE"
     },
     {
       "key": "env6Amount",
@@ -509,7 +509,7 @@
         "SQUARE",
         "S&H"
       ],
-      "default": "Sine"
+      "default": "SINE"
     },
     {
       "key": "lfo1Shape",
@@ -537,7 +537,7 @@
         "DLY TIME",
         "DLY FBK"
       ],
-      "default": "None"
+      "default": "NONE"
     },
     {
       "key": "lfo1Amount",
@@ -553,7 +553,7 @@
         "UNIPOLAR",
         "BIPOLAR"
       ],
-      "default": "Unipolar"
+      "default": "UNIPOLAR"
     },
     {
       "key": "lfo2Rate",
@@ -573,7 +573,7 @@
         "SQUARE",
         "S&H"
       ],
-      "default": "Sine"
+      "default": "SINE"
     },
     {
       "key": "lfo2Shape",
@@ -601,7 +601,7 @@
         "DLY TIME",
         "DLY FBK"
       ],
-      "default": "None"
+      "default": "NONE"
     },
     {
       "key": "lfo2Amount",
@@ -617,7 +617,7 @@
         "UNIPOLAR",
         "BIPOLAR"
       ],
-      "default": "Unipolar"
+      "default": "UNIPOLAR"
     },
     {
       "key": "lfo3Rate",
@@ -637,7 +637,7 @@
         "SQUARE",
         "S&H"
       ],
-      "default": "Sine"
+      "default": "SINE"
     },
     {
       "key": "lfo3Shape",
@@ -665,7 +665,7 @@
         "DLY TIME",
         "DLY FBK"
       ],
-      "default": "None"
+      "default": "NONE"
     },
     {
       "key": "lfo3Amount",
@@ -681,7 +681,7 @@
         "UNIPOLAR",
         "BIPOLAR"
       ],
-      "default": "Unipolar"
+      "default": "UNIPOLAR"
     },
     {
       "key": "lfo4Rate",
@@ -701,7 +701,7 @@
         "SQUARE",
         "S&H"
       ],
-      "default": "Sine"
+      "default": "SINE"
     },
     {
       "key": "lfo4Shape",
@@ -729,7 +729,7 @@
         "DLY TIME",
         "DLY FBK"
       ],
-      "default": "None"
+      "default": "NONE"
     },
     {
       "key": "lfo4Amount",
@@ -745,7 +745,7 @@
         "UNIPOLAR",
         "BIPOLAR"
       ],
-      "default": "Unipolar"
+      "default": "UNIPOLAR"
     },
     {
       "key": "lpgDecay",
@@ -782,7 +782,7 @@
         "FREE",
         "SYNC"
       ],
-      "default": "Free"
+      "default": "SYNC"
     },
     {
       "key": "delayDiv",
@@ -805,7 +805,7 @@
         "FREE",
         "SYNC"
       ],
-      "default": "Free"
+      "default": "FREE"
     },
     {
       "key": "lfo1Div",
@@ -828,7 +828,7 @@
         "FREE",
         "SYNC"
       ],
-      "default": "Free"
+      "default": "FREE"
     },
     {
       "key": "lfo2Div",
@@ -851,7 +851,7 @@
         "FREE",
         "SYNC"
       ],
-      "default": "Free"
+      "default": "FREE"
     },
     {
       "key": "lfo3Div",
@@ -874,7 +874,7 @@
         "FREE",
         "SYNC"
       ],
-      "default": "Free"
+      "default": "FREE"
     },
     {
       "key": "lfo4Div",

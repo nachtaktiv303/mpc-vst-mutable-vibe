@@ -283,6 +283,11 @@ void rings_render(void* h, float* out_L, float* out_R, int n_frames) {
     float blk_aux[kMaxBlockSize];
 
     int pos = 0;
+    // Poly headroom: the global amp VCA sits over the WHOLE polyphonic Part output, so raising polyphony
+    // raises the summed level and used to clip. Scale by 1/sqrt(voices) (RMS-correct headroom) so a full
+    // chord stays inside the output soft-clip knee instead of tearing. Trade-off: a single note played on a
+    // high poly setting is quieter; predictable (no pumping) and matches the Plaits port's fixed headroom.
+    float poly_hr = 1.0f / sqrtf((float)std::max(1, e.part.polyphony()));
     while (pos < n_frames) {
         int sz = std::min(kBlk, n_frames - pos);
 
@@ -340,7 +345,7 @@ void rings_render(void* h, float* out_L, float* out_R, int n_frames) {
             default: break;
         }
 
-        float gain = e.velocity * 0.65f * e.adsr_env;
+        float gain = e.velocity * 0.65f * e.adsr_env * poly_hr;
         for (int j = 0; j < sz; ++j) {
             float l = blk_out[j] * 0.65f + blk_aux[j] * 0.35f;
             float r = blk_out[j] * 0.35f + blk_aux[j] * 0.65f;
