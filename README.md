@@ -10,7 +10,11 @@ its own native MPC touchscreen pages.
 
 > Built with the [mpc-vst-plugins](https://github.com/sd88me/mpc-vst-plugins) porting kit.
 
-![Overview page](preview_0.png)
+![Overview](preview_0.png)
+![Envelopes](preview_1.png)
+![LFOs](preview_2.png)
+![Effects](preview_3.png)
+![Modulation](preview_4.png)
 
 ## What's in it
 
