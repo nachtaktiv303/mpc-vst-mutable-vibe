@@ -1,0 +1,36 @@
+name: Release
+
+# Build Mutable Vibe MPC and attach the zip to a DRAFT release in this repo.
+# Calls the reusable workflow in sd88me/mpc-vst-plugins, pinned to one commit
+# in both the uses:@ref and tools_ref (docs/RELEASING.md "Releasing from CI").
+# After a run: look at the preview artifacts, smoke-test the zip on a device,
+# then publish the draft (which creates the tag).
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version for the zip and INSTALL.md, e.g. 0.9.2
+        type: string
+        required: true
+      dry_run:
+        description: Build and package only (zip + previews as run artifacts), no draft release
+        type: boolean
+        default: false
+
+jobs:
+  vst:
+    uses: sd88me/mpc-vst-plugins/.github/workflows/vst-release.yml@f8ff4cb49895b10d456268296830baaf82ce4faa
+    permissions:
+      contents: write
+    with:
+      tag: mutable-vibe-vst-v${{ inputs.version }}
+      version: ${{ inputs.version }}
+      tools_ref: f8ff4cb49895b10d456268296830baaf82ce4faa
+      vst_dir: vst
+      build: vst/build.sh
+      host_test: '"$MPC_VST/tools/test_port.sh" vst/vst.json'
+      about: "Mutable Instruments Rings + Plaits in one synth: 6 resonator models and 14 melodic macro-oscillator engines, with filter, FX, 4 envelopes, 4 LFOs, a mod matrix and tempo sync, plus a touchscreen skin and Q-Links."
+      plugin_id: mutable-vibe
+      license: MIT
+      dry_run: ${{ inputs.dry_run }}
