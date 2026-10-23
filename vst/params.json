@@ -62,7 +62,8 @@
         "P: STRING",
         "P: MODAL SYNTH"
       ],
-      "default": "R: SYMPATHETIC"
+      "default": "R: SYMPATHETIC",
+      "refresh_display": true
     },
     {
       "key": "attack",
@@ -782,7 +783,8 @@
         "FREE",
         "SYNC"
       ],
-      "default": "SYNC"
+      "default": "SYNC",
+      "refresh_display": true
     },
     {
       "key": "delayDiv",

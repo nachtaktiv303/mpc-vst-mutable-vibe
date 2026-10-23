@@ -20,13 +20,13 @@ on:
 
 jobs:
   vst:
-    uses: sd88me/mpc-vst-plugins/.github/workflows/vst-release.yml@f8ff4cb49895b10d456268296830baaf82ce4faa
+    uses: sd88me/mpc-vst-plugins/.github/workflows/vst-release.yml@10ffa29494e1f9ebb30907abadf7f66c73734d69
     permissions:
       contents: write
     with:
       tag: mutable-vibe-vst-v${{ inputs.version }}
       version: ${{ inputs.version }}
-      tools_ref: f8ff4cb49895b10d456268296830baaf82ce4faa
+      tools_ref: 10ffa29494e1f9ebb30907abadf7f66c73734d69
       vst_dir: vst
       build: vst/build.sh
       host_test: '"$MPC_VST/tools/test_port.sh" vst/vst.json'
